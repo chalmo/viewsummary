@@ -6,6 +6,8 @@
 *.c text
 *.h text
 *.java text
+*.html text
+*.xml text
 *.jelly text
 
 # Declare files that will always have CRLF line endings on checkout.
