@@ -6,10 +6,6 @@ import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import org.kohsuke.stapler.DataBoundConstructor;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public class Checkbox implements Describable<Checkbox>
 {
     private final String name;

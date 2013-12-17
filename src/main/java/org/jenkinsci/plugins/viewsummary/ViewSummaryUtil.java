@@ -19,10 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public class ViewSummaryUtil {
 
     private final static Result WORST_RESULT = Result.ABORTED;

@@ -22,10 +22,7 @@ import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
+
 public class ViewSummaryDashboard extends ListView implements ViewSummary, ViewSummaryConfig {
 
     private final static Logger LOG = Logger.getLogger(ViewSummaryDashboard.class.getName());

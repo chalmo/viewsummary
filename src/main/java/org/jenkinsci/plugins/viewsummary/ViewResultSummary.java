@@ -3,10 +3,6 @@ package org.jenkinsci.plugins.viewsummary;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public class ViewResultSummary extends ViewResult {
 
     private List<ViewResult> viewResults = new ArrayList<ViewResult>();

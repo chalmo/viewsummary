@@ -4,10 +4,6 @@ import hudson.model.HealthReport;
 import hudson.model.Result;
 import hudson.model.View;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public class ViewResult {
     private View view;
     private Result worstResult;

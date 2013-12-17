@@ -2,10 +2,6 @@ package org.jenkinsci.plugins.viewsummary;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public interface ViewSummaryConfig {
     public String getIncludeRegexp();
     public ArrayList<Checkbox> getSelectedViews();

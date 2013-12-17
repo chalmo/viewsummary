@@ -12,10 +12,6 @@ import java.util.logging.Logger;
 import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
 
-/**
- *
- * @author christer.moren@leanon.se
- */
 public class ViewSummaryPortlet extends DashboardPortlet implements ViewSummary, ViewSummaryConfig {
 
     private final static Logger LOG = Logger.getLogger(ViewSummaryPortlet.class.getName());
