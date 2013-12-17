@@ -1,0 +1,40 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+   <style>
+    .hetero-list-container.with-drag-drop .repeated-chunk {
+        border: 0px dashed transparent;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+  </style>
+  <f:entry title="${%views}" help="/plugin/view-summary-dashboard/help/selectedViews.html">
+    <f:repeatableProperty field="selectedViews" default="${allViews}" noAddButton="true"/>
+  </f:entry>
+  <f:entry title="${%includeRegexp}" help="/plugin/view-summary-dashboard/help/includeRegexp.html">
+      <f:textbox name="includeRegexp" field="includeRegexp"/>
+  </f:entry>
+  <f:advanced>
+  <f:entry title="${%includeTests}">
+      <f:checkbox name="includeTests" field="includeTests" default="true"/>
+  </f:entry>
+  <f:entry title="${%includeTotal}">
+      <f:checkbox name="includeTotal" field="includeTotal" default="true"/>
+  </f:entry>
+  <f:entry title="${%errorColor}">
+      <f:textbox name="errorColor" field="errorColor" default="#FF0000"/>
+  </f:entry>
+  <f:entry title="${%warningColor}">
+      <f:textbox name="warningColor" field="warningColor" default="#FFFF00"/>
+  </f:entry>
+  <f:entry title="${%borderColor}">
+      <f:textbox name="tableBorderColor" field="tableBorderColor" default="#BBBBBB"/>
+  </f:entry>
+  <f:entry title="${%headerColor}">
+      <f:textbox name="tableHeaderColor" field="tableHeaderColor" default="#F0F0F0"/>
+  </f:entry>
+  <f:entry title="${%footerColor}">
+      <f:textbox name="tableFooterColor" field="tableFooterColor" default="#F0F0F0"/>
+  </f:entry>
+  </f:advanced>
+</j:jelly>

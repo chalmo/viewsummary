@@ -1,0 +1,147 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:dp="/hudson/plugins/view/dashboard" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <j:getStatic var="grey" className="hudson.model.BallColor" field="GREY"/>
+    <j:set var="iconSize" value="16x16" />
+    <j:set var="errorBgColor" value="${it.getErrorColor()}" />
+    <j:set var="warningBgColor" value="${it.getWarningColor()}" />
+    <j:set var="borderColor" value="${it.getTableBorderColor()}" />
+    <j:set var="headerBgColor" value="${it.getTableHeaderColor()}" />
+    <j:set var="footerBgColor" value="${it.getTableFooterColor()}" />
+    <j:set var="summary" value="${it.getViewResultSummary()}"/>
+        <tr style="border-top: 1px ${borderColor} solid; border-bottom: 0px; border-left: 1px ${borderColor} solid; border-right: 1px ${borderColor} solid;">
+            <th colspan="3" style="background-color: ${headerBgColor};"></th>
+            <th colspan="7" align="center" style="border-left: 1px ${borderColor} solid; background-color: ${headerBgColor};">${%jobsTitle}</th>
+            <j:if test="${it.isIncludeTests()}">
+                <th colspan="4" align="center" style="border-left: 1px ${borderColor} solid; background-color: ${headerBgColor};">${%testsTitle}</th>
+            </j:if>
+        </tr>
+        <tr style="border-top: 0px; border-bottom: 1px ${borderColor} solid; border-left: 1px ${borderColor} solid; border-right: 1px ${borderColor} solid; background-color: ${headerBgColor}">
+            <th align="left" tooltip="${%statusTooltip}" style="background-color: ${headerBgColor};">${%status}</th>
+            <th align="left" tooltip="${%weatherTooltip}" style="background-color: ${headerBgColor};">${%weather}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%view}</th>
+            <th align="left" style="border-left: 1px ${borderColor} solid; background-color: ${headerBgColor};">${%noJobs}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noSuccess}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noFails}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noUnstable}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noAborts}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noNotBuilt}</th>
+            <th align="left" style="background-color: ${headerBgColor};">${%noDisabled}</th>
+            <j:if test="${it.isIncludeTests()}">
+                <th align="left" style="border-left: 1px ${borderColor} solid; background-color: ${headerBgColor};">${%noTests}</th>
+                <th align="left" style="background-color: ${headerBgColor};">${%noTestsSuccess}</th>
+                <th align="left" style="background-color: ${headerBgColor};">${%noTestsFailed}</th>
+                <th align="left" style="background-color: ${headerBgColor};">${%noTestsSkipped}</th>
+            </j:if>
+        </tr>
+        <j:choose>
+            <j:when test="${empty(summary.getViewResults())}">
+                <tr>
+                    <j:choose>
+                        <j:when test="${it.isIncludeTests()}">
+                            <td colspan="14">${%noSelection}</td>
+                        </j:when>
+                        <j:otherwise>
+                            <td colspan="10">${%noSelection}</td>
+                        </j:otherwise>
+                    </j:choose>
+                </tr>
+            </j:when>
+            <j:otherwise>
+                <j:forEach var="v" items="${summary.getViewResults()}">
+                    <j:set var="result" value="${v.worstResult}"/>
+                    <j:set var="health" value="${v.worstHealthReport}"/>
+                    <tr style="border: 1px ${borderColor} solid;">
+                        <td>
+                            <img src="${imagesURL}/${iconSize}/${result!=null ? result.color.image : grey.image}" alt="${result!=null ? result.color.desription : 'N/A'}"/>
+                        </td>
+                        <td><j:if test="${health != null}"><img src="${imagesURL}/${iconSize}/${health.iconUrl}"/></j:if></td>
+                        <td>
+                            <a href="${rootURL}/${v.view.url}">${v.view.viewName}</a>
+                        </td>
+                        <td style="border-left: 1px ${borderColor} solid;">${v.noJobs}</td>
+                        <td>${v.noSuccess}</td>
+                        <j:choose>
+                            <j:when test="${v.noFails > 0}">
+                                <td bgColor="${errorBgColor}">${v.noFails}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td>${v.noFails}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:choose>
+                            <j:when test="${v.noUnstable > 0}">
+                                <td bgColor="${errorBgColor}">${v.noUnstable}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td>${v.noUnstable}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:choose>
+                            <j:when test="${v.noAborts > 0}">
+                                <td bgColor="${warningBgColor}">${v.noAborts}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td>${v.noAborts}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:choose>
+                            <j:when test="${v.notBuilt > 0}">
+                                <td bgColor="${warningBgColor}">${v.notBuilt}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td>${v.notBuilt}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:choose>
+                            <j:when test="${v.noDisabled > 0}">
+                                <td bgColor="${warningBgColor}">${v.noDisabled}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td>${v.noDisabled}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:if test="${it.isIncludeTests()}">
+                            <td align="left" style="border-left: 1px ${borderColor} solid;">${v.noTests}</td>
+                            <td align="left">${v.noTestsSuccess}</td>
+                            <j:choose>
+                                <j:when test="${v.noTestsFailed > 0}">
+                                    <td bgColor="${errorBgColor}">${v.noTestsFailed}</td>
+                                </j:when>
+                                <j:otherwise>
+                                    <td>${v.noTestsFailed}</td>
+                                </j:otherwise>
+                            </j:choose>
+                            <j:choose>
+                                <j:when test="${v.noTestsSkipped > 0}">
+                                    <td bgColor="${warningBgColor}">${v.noTestsSkipped}</td>
+                                </j:when>
+                                <j:otherwise>
+                                    <td>${v.noTestsSkipped}</td>
+                                </j:otherwise>
+                            </j:choose>
+                        </j:if>
+                    </tr>
+                </j:forEach>
+                <j:if test="${it.isIncludeTotal()}">
+                    <tr style="border: 1px ${borderColor} solid; background-color: ${footerBgColor};">
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: bold;">${%total}</td>
+                        <td style="border-left: 1px ${borderColor} solid;">${summary.noJobs}</td>
+                        <td>${summary.noSuccess}</td>
+                        <td>${summary.noFails}</td>
+                        <td>${summary.noUnstable}</td>
+                        <td>${summary.noAborts}</td>
+                        <td>${summary.notBuilt}</td>
+                        <td>${summary.noDisabled}</td>
+                        <j:if test="${it.isIncludeTests()}">
+                            <td align="left" style="border-left: 1px ${borderColor} solid;">${summary.noTests}</td>
+                            <td align="left">${summary.noTestsSuccess}</td>
+                            <td align="left">${summary.noTestsFailed}</td>
+                            <td align="left">${summary.noTestsSkipped}</td>
+                        </j:if>
+                    </tr>
+                 </j:if>
+            </j:otherwise>
+        </j:choose>
+</j:jelly>

@@ -1,0 +1,9 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <j:set var="allViews" value="${descriptor.getDefaultViews()}"/>
+    <f:entry title="${%name}">
+        <f:textbox name="portlet.name" field="name" default="${descriptor.getDisplayName()}" />
+    </f:entry>
+    <st:include page="config_common.jelly" class="org.jenkinsci.plugins.viewsummary.ViewSummaryPortlet"/>
+
+</j:jelly>

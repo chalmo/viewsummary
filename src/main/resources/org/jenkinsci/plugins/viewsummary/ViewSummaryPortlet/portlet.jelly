@@ -1,0 +1,6 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:dp="/hudson/plugins/view/dashboard" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <dp:decorate portlet="${it}">
+        <st:include page="view_summary.jelly" class="org.jenkinsci.plugins.viewsummary.ViewSummaryPortlet" />
+    </dp:decorate>
+</j:jelly>
