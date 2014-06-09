@@ -111,10 +111,10 @@ public class ViewSummaryUtil {
                 Job job = (Job) tli;
                 noJobs++;
                 final Run r = job.getLastBuild();
-                if (r != null && r.getResult().isWorseThan(worstResult)) {
+                if (r != null && r.getResult() != null && r.getResult().isWorseThan(worstResult)) {
                     worstResult = r.getResult();
                 }
-                if (r == null) {
+                if (r == null || r.getResult() == null) {
                     notBuilt++;
                 } else if (r.getResult() == Result.FAILURE) {
                     noFails++;
